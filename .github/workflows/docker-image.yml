@@ -39,3 +39,12 @@ jobs:
         push: true
         tags: ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.TAG_NAME }}
         build-args: ${{ env.DOCKER_BUILD_ARGS }}
+
+update_manifest:
+  runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: 'https://github.com/xedriq/test-gitops-manifest.git'
+      run: pwd

@@ -51,7 +51,6 @@ jobs:
       with:
         repository: 'xedriq/test-gitops-manifest'
         path: 'test-gitops-manifest'
-        token: ${{ secrets.GH_TOKEN }}
 
     - name: Extract Git Tag Name
       run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -80,4 +79,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git push https://x-access-token:${GITHUB_TOKEN}@github.com/xedriq/test-gitops-manifest.git HEAD:main
+        git push

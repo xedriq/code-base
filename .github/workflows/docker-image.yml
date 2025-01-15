@@ -59,3 +59,4 @@ jobs:
 
     - name: Cat values
       run: cat my-app/values.yaml
+      working-directory: test-gitops-manifest

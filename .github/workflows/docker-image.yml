@@ -50,4 +50,4 @@ jobs:
         repository: 'https://github.com/xedriq/test-gitops-manifest.git'
     
     - name: Print working directory
-        run: pwd
+      run: pwd

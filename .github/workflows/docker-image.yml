@@ -76,7 +76,6 @@ jobs:
 
     - name: Push changes
       working-directory: test-gitops-manifest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      token: ${{ secrets.GH_TOKEN }}
       run: |
         git push

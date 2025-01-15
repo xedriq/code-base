@@ -59,7 +59,7 @@ jobs:
       env:
         TAG: ${{ env.TAG_NAME }}
       run: |
-        sed -i "s/tag:*/tag: ${TAG}/g" my-app/values.yaml
+        sed -i "s/tag:.*/tag: ${TAG}/g" my-app/values.yaml
       working-directory: test-gitops-manifest
 
     - name: Cat values

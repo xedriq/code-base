@@ -48,7 +48,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        repository: xedriq/test-gitops-manifest.git
+        repository: 'xedriq/test-gitops-manifest.git'
     
     - name: Print working directory
       run: pwd

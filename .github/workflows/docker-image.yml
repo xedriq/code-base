@@ -46,10 +46,16 @@ jobs:
     needs: build_and_push_image
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout manifest repo
+      uses: actions/checkout@v4
       with:
         repository: 'xedriq/test-gitops-manifest'
         path: 'test-gitops-manifest'
     
-    - name: Print working directory
-      run: ls -lah test-gitops-manifest
+    - name: Replace tag
+      run: |
+        sed -i 's/tag:*/tag: {{ env.TAG_NAME }}/g' my-app/values.yaml
+      working-directory: test-gitops-manifest
+
+    - name: Cat values
+      run: cat my-app/values.yaml

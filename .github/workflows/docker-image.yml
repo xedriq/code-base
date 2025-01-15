@@ -51,10 +51,10 @@ jobs:
       with:
         repository: 'xedriq/test-gitops-manifest'
         path: 'test-gitops-manifest'
-    
+
     - name: Extract Git Tag Name
       run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-    
+
     - name: Replace tag
       env:
         TAG: ${{ env.TAG_NAME }}
@@ -65,3 +65,17 @@ jobs:
     - name: Cat values
       run: cat my-app/values.yaml
       working-directory: test-gitops-manifest
+    
+    - name: Commit changes
+      working-directory: test-gitops-manifest
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add my-app/values.yaml
+        git commit -m "update image tag"
+        
+    - name: Push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git push

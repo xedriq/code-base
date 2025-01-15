@@ -67,13 +67,15 @@ jobs:
       working-directory: test-gitops-manifest
     
     - name: Commit changes
+      working-directory: test-gitops-manifest
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add test-gitops-manifest/my-app/values.yaml
+        git add my-app/values.yaml
         git commit -m "update image tag"
 
     - name: Push changes
+      working-directory: test-gitops-manifest
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |

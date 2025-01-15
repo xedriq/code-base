@@ -48,8 +48,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        repository: 'xedriq/test-gitops-manifest.git'
-        path: './'
+        repository: 'xedriq/test-gitops-manifest'
+        path: 'main'
     
     - name: Print working directory
       run: ls -lah

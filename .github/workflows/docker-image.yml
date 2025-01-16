@@ -68,6 +68,7 @@ jobs:
     
     - name: Add ssh private key
       run: |
+        apt update && apt install openssh-client -y
         ssh-add ${{ env.SSH_PRIVATE_KEY }}
 
     - name: Commit changes

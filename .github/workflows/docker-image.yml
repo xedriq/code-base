@@ -77,9 +77,11 @@ jobs:
         # Add GitHub to known hosts to prevent prompt
         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
+
     - name: Commit changes
       working-directory: test-gitops-manifest
       run: |
+        git remote -v
         git config --global user.name "GitHub Action"
         git config --global user.email "action@github.com"
         git add my-app/values.yaml

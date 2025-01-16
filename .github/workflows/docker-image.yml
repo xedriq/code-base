@@ -46,11 +46,23 @@ jobs:
     needs: build_and_push_image
 
     steps:
+    - name: Setup ssh
+      run: |
+        # Create .ssh directory
+        mkdir -p ~/.ssh
+        # Add your existing private SSH key from secrets
+        echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        # Set permissions for the private key
+        chmod 600 ~/.ssh/id_rsa
+        # Add GitHub to known hosts to prevent prompt
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
     - name: Checkout manifest repo
       uses: actions/checkout@v2
       with:
         repository: 'xedriq/test-gitops-manifest'
         path: 'test-gitops-manifest'
+        ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Extract Git Tag Name
       run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -66,18 +78,6 @@ jobs:
       run: cat my-app/values.yaml
       working-directory: test-gitops-manifest
     
-    - name: Setup ssh
-      run: |
-        # Create .ssh directory
-        mkdir -p ~/.ssh
-        # Add your existing private SSH key from secrets
-        echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        # Set permissions for the private key
-        chmod 600 ~/.ssh/id_rsa
-        # Add GitHub to known hosts to prevent prompt
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-
     - name: Commit changes
       working-directory: test-gitops-manifest
       run: |

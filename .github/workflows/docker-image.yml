@@ -69,6 +69,8 @@ jobs:
     
     - name: Commit changes
       working-directory: test-gitops-manifest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         git config --global user.name "xedriq"
         git config --global user.email "xedriq@gmail.com"

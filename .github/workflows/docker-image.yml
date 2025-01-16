@@ -72,11 +72,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git config --global user.name "xedriq"
-        git config --global user.email "xedriq@gmail.com"
+        git config --global user.name "GitHub Action"
+        git config --global user.email "action@github.com"
         git add my-app/values.yaml
         git commit -m "update image tag"
-        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/xedriq/test-gitops-manifest.git
         git push origin main
 
     

@@ -76,7 +76,7 @@ jobs:
         git config --global user.email "xedriq@gmail.com"
         git add my-app/values.yaml
         git commit -m "update image tag"
-        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/xedriq/working-directory.git
+        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/xedriq/test-gitops-manifest.git
         git push origin main
 
     

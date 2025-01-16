@@ -68,9 +68,12 @@ jobs:
     
     - name: Setup ssh
       run: |
-        sudo apt-get update
-        sudo apt-get install -y openssh-client
-        ssh-add ${{ env.SSH_PRIVATE_KEY }}
+        # Add your existing private SSH key from secrets
+        echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        # Set permissions for the private key
+        chmod 600 ~/.ssh/id_rsa
+        # Add GitHub to known hosts to prevent prompt
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
 
     - name: Commit changes
       working-directory: test-gitops-manifest

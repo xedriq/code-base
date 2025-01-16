@@ -68,6 +68,8 @@ jobs:
     
     - name: Setup ssh
       run: |
+        # Create .ssh directory
+        mkdir -p ~/.ssh
         # Add your existing private SSH key from secrets
         echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         # Set permissions for the private key

@@ -79,4 +79,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git push
+        git push https://x-access-token:${GITHUB_TOKEN}@github.com/xedriq/test-gitops-manifest.git HEAD:main

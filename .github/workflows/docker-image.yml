@@ -50,7 +50,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: 'xedriq/test-gitops-manifest'
-        token: ${{ secrets.GH_TOKEN }}
         path: 'test-gitops-manifest'
 
     - name: Extract Git Tag Name
@@ -67,10 +66,12 @@ jobs:
       run: cat my-app/values.yaml
       working-directory: test-gitops-manifest
     
+    - name: Add ssh private key
+      run: |
+        ssh-add ${{ env.SSH_PRIVATE_KEY }}
+
     - name: Commit changes
       working-directory: test-gitops-manifest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         git config --global user.name "GitHub Action"
         git config --global user.email "action@github.com"

@@ -66,9 +66,10 @@ jobs:
       run: cat my-app/values.yaml
       working-directory: test-gitops-manifest
     
-    - name: Add ssh private key
+    - name: Setup ssh
       run: |
-        apt update && apt install openssh-client -y
+        sudo apt-get update
+        sudo apt-get install -y openssh-client
         ssh-add ${{ env.SSH_PRIVATE_KEY }}
 
     - name: Commit changes

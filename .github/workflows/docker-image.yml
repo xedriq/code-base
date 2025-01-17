@@ -70,14 +70,19 @@ jobs:
     - name: Replace tag
       env:
         TAG: ${{ env.TAG_NAME }}
-      run: |
-        sed -i "s/tag:.*/tag: ${TAG}/g" my-app/values.yaml
-      working-directory: test-gitops-manifest
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq eval '.image.tag=env(TAG)' -i my-app/values.yaml
+      # run: |
+      #   sed -i "s/tag:.*/tag: ${TAG}/g" my-app/values.yaml
+      # run: |
+      #   yq eval '.image.tag="${TAG}"' -i my-app/values.yaml
+      # working-directory: test-gitops-manifest
 
     - name: Cat values
       run: cat my-app/values.yaml
       working-directory: test-gitops-manifest
-    
+
     - name: Commit changes
       working-directory: test-gitops-manifest
       run: |
@@ -87,5 +92,3 @@ jobs:
         git add my-app/values.yaml
         git commit -m "update image tag"
         git push origin main
-
-    

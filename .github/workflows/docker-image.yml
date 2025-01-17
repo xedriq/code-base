@@ -73,11 +73,6 @@ jobs:
       uses: mikefarah/yq@master
       with:
         cmd: yq eval '.image.tag=env(TAG)' -i test-gitops-manifest/my-app/values.yaml
-      # run: |
-      #   sed -i "s/tag:.*/tag: ${TAG}/g" my-app/values.yaml
-      # run: |
-      #   yq eval '.image.tag="${TAG}"' -i my-app/values.yaml
-      # working-directory: test-gitops-manifest
 
     - name: Cat values
       run: cat my-app/values.yaml
